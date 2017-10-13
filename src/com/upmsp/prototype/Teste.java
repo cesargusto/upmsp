@@ -28,7 +28,7 @@ public class Teste {
         System.out.println("-------------------------------");
         
         BuscaLocal bl = new BuscaLocal(solucao);
-        bl.troca_intra_Maq();
+        bl.change_Maq();
         
     }
 }

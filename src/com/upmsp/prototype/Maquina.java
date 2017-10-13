@@ -35,6 +35,10 @@ public class Maquina {
         this.maquina.remove(i);
     }
     
+    public void removeLastJob() {
+        this.maquina.remove(this.maquina.size() - 1);
+    }
+    
     public void insertJobToMaq(int i, Integer job) {
         this.maquina.add(i, job);
     }

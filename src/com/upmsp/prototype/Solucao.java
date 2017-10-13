@@ -1,6 +1,7 @@
 package com.upmsp.prototype;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Solucao {
     
@@ -29,6 +30,9 @@ public class Solucao {
         return this.solucao.get(i);
     }
 
+    public void swap_Machine(int i, int j){
+    	Collections.swap(this.solucao, i, j);
+    }
 
     public void print_solucao(){
     
