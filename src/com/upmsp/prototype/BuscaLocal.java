@@ -110,9 +110,6 @@ public class BuscaLocal {
 				this.solucao.print_solucao();
 				this.solucao.swap_Machine(maq_mspan, i);
 			}
-		}
-		
-		
-		
+		}	
 	}
 }

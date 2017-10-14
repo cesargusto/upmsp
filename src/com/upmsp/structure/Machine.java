@@ -23,7 +23,8 @@ public class Machine {
 		}
 		return tempo_total;
 	}
-	public int getTamMaq() {
+	
+	public int getSizeMaq() {
 		return machine.size();
 	}
 	
@@ -34,20 +35,33 @@ public class Machine {
 	public int getJob(int i){
 		return (Integer)this.machine.get(i);
 	}
-	public void setJobMaq(Integer job) {
-		this.machine.add(job);
-	}
+
+    public void addJobToMaq(Integer job) {
+        this.machine.add(job);
+    }
 	
 	public void setJobMaq(int pos, int job) {
 		this.machine.add(pos, job);
 	}
 	
-	public void removeJob(int pos){
+    public void setJobToMaq(int i, Integer job) {
+        this.machine.set(i, job);
+    }
+    
+    public void insertJobToMaq(int i, Integer job) {
+        this.machine.add(i, job);
+    }
+	
+    public void removeJobToMaq(int pos){
 		this.machine.remove(pos);
 	}
+    public void removeLastJob() {
+        this.machine.remove(this.machine.size() - 1);
+    }
 
 	public void trocaJob(int i, int j){
 		Collections.swap(this.machine, i, j);
 	}
+	
 
 }
