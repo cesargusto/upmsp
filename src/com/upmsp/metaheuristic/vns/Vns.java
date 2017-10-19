@@ -11,14 +11,15 @@ public class Vns {
 	private Solution solution;
 	private LocalSearch ls;
 	private final int quant_moviments = 5;
-	private int num_it = 1000000;
+	private int num_it;
 	
-	public Vns(Solution s) throws CloneNotSupportedException{
+	public Vns(Solution s, int num_it) throws CloneNotSupportedException{
+		this.num_it = num_it;
 		this.solution = s;
 		this.best_solution = s.clone();
 		this.ls = new LocalSearch();
 	}
-	public void execute() throws CloneNotSupportedException{
+	public Solution execute_vns() throws CloneNotSupportedException{
 		int v = 1;
 		Solution sol_aux;
 		while(num_it > 0){
@@ -38,16 +39,23 @@ public class Vns {
 				else{
 					Random rnd = new Random();
 					if(rnd.nextBoolean()){
-						this.solution = ls.two_realloc(solution);
-						this.solution = ls.two_swap(solution);
+						if(solution.getMaq(solution.maior_menor().get(2)).getSizeMaq() > 2){
+							this.solution = ls.two_realloc(solution);
+							if(solution.getMaq(solution.maior_menor().get(2)).getSizeMaq() > 2){
+								this.solution = ls.two_swap(solution);
+							}
+						}
 					}else
-						this.solution = ls.two_realloc(solution);
-					v = 1;
+						if(solution.getMaq(solution.maior_menor().get(2)).getSizeMaq() > 2){
+							this.solution = ls.two_realloc(solution);
+							}
+						v = 1;
 				}
 			}
 			num_it --;
 		}
-		this.best_solution.print_solution();
+		//this.best_solution.print_solution();
+		return best_solution;
 	}
 	
 	public Solution vizinhanca(int v, Solution s) throws CloneNotSupportedException{
