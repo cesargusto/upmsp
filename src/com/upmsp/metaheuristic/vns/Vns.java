@@ -3,19 +3,22 @@ package com.upmsp.metaheuristic.vns;
 import java.util.Random;
 
 import com.upmsp.localsearch.LocalSearch;
+import com.upmsp.experiment.BestResults;
 import com.upmsp.structure.Solution;
 
 public class Vns {
 	
 	private Solution best_solution;
 	private Solution solution;
+	private BestResults best_results;
 	private LocalSearch ls;
 	private final int quant_moviments = 5;
 	private int num_it;
 	
-	public Vns(Solution s, int num_it) throws CloneNotSupportedException{
+	public Vns(Solution s, int num_it, BestResults best_results) throws CloneNotSupportedException{
 		this.num_it = num_it;
 		this.solution = s;
+		this.best_results = best_results;
 		this.best_solution = s.clone();
 		this.ls = new LocalSearch();
 	}
@@ -52,6 +55,7 @@ public class Vns {
 						v = 1;
 				}
 			}
+			this.best_results.setMakespan_list(best_solution.makespan());
 			num_it --;
 		}
 		//this.best_solution.print_solution();

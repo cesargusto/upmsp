@@ -19,8 +19,10 @@ public class Instance {
 	private int[][] tempo_exec;
 	private int[][] tempo_prep;
 	
-	public Instance(String nome_arq) throws IOException{
-		this.is = new FileInputStream("instancias/"+nome_arq+".txt");
+	public Instance(String file_name) throws IOException{
+		this.is = new FileInputStream("instancias/"+file_name+".txt");
+		//PARA O PROCESSO AUTOMATIZADO DESCOMENTAR LINHA ABAIXO
+		//this.is = new FileInputStream(name_file);
 		this.isr = new InputStreamReader(this.is);
 		this.br = new BufferedReader(this.isr);
 		this.linha = br.readLine();
@@ -30,7 +32,7 @@ public class Instance {
 		this.n_desconhecido = Integer.parseInt(tk.nextToken());
 		this.tempo_exec = new int[n_maqs][n_jobs];
 		this.tempo_prep = new int[n_jobs*n_maqs][n_jobs];
-		this.ler(nome_arq);
+		this.ler(file_name);
 	}
 	
 	public void ler(String nome) throws IOException{

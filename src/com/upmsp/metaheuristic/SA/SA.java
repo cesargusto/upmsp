@@ -2,12 +2,14 @@ package com.upmsp.metaheuristic.SA;
 
 import java.util.Random;
 
+import com.upmsp.experiment.BestResults;
 import com.upmsp.structure.Solution;
 
 public class SA {
 	
 	private Solution solucao;
 	private MovimentosSA m_sa;
+	private BestResults best_results;
 	private double T_INICIAL;
 	private double ALF;
 	private int SAMAX;
@@ -20,12 +22,13 @@ public class SA {
 		this.SAMAX = samax;
 	}
 	
-	public SA(Solution solucao) {
+	public SA(Solution solucao, int samax, BestResults best_results) {
 		this.solucao = solucao;
 		this.m_sa = new MovimentosSA();
+		this.best_results = best_results;
 		this.T_INICIAL = 800.0;
 		this.ALF = 0.9;
-		this.SAMAX = 600;
+		this.SAMAX = samax;
 	}
 	
 	public Solution execute_sa() throws CloneNotSupportedException {
@@ -70,10 +73,9 @@ public class SA {
 			
 			T = ALF * T;
 			IterT = 0;
+			this.best_results.setMakespan_list(melhor_solucao.makespan());
 		}
 		solucao = melhor_solucao.clone();
-		//System.out.println("\n\nMELHOR SOLUÇÃO ENCONTRDA:");
-		//solucao.print_solution();
 		
 		return solucao;
 	}
