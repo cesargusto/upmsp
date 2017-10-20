@@ -1,3 +1,15 @@
+/****************************************************************
+ * Esta classe foi criada em setembro de 2017
+ * Recebeu modificações de correção no dia 18 de out 2017
+ * 
+ * Esta classe é responsável por movimentos da metaheuristica SA.
+ * Estes movimentos são aleatórios e executam apenas uma vez sobre
+ * a solução e são escolhidos de maneira aleatória.
+ * 
+ * @author cesar
+ * 
+ *****************************************************************/
+
 package com.upmsp.metaheuristic.SA;
 
 import java.util.Random;

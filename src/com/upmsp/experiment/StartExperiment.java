@@ -1,3 +1,18 @@
+/***********************
+ * Esta classe dá o inicio do experimento criando uma array
+ * com todos os arquivos existentes em um diretorio passado e então
+ * passando seus nomes para a função execute_experiment. A função start executa
+ * um número n de vezes (executions_number) o algoritmo para todos os arquivos contidos no
+ * diretorio especificado.
+ * 
+ * Não é necessario passar um Array contendo os arquivos e sim utilizar
+ * uma forma de extrair direto só os nomes dos arquivos passando um Array
+ * de String ao invés de um Array de Files.
+ * 
+ * Classe criada em: 19 de out 2017
+ * @author cesar
+ * 
+********************************************************************/
 package com.upmsp.experiment;
 
 import java.io.File;
@@ -7,9 +22,13 @@ import com.upmsp.util.View;
 
 public class StartExperiment {
 	
-	private static int executions_number = 3;
+	private int executions_number;
 
-	public static void main(String[] args) throws IOException, CloneNotSupportedException {
+	public StartExperiment(int n_exec){
+		this.executions_number = n_exec;
+	}
+	
+	public void start() throws IOException, CloneNotSupportedException {
 		
 		String path = "experiment_instances/";
 		File[] name_list = ReadDirFilesNames.leDir(path);

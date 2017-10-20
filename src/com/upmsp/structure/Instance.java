@@ -1,3 +1,12 @@
+/********************************************************************
+ * 
+ * Uma melhoria para esta classe é substituir a estrutura de dados de arrays
+ * uni e bidimenssionais por uma estrutura do tipo Hash(chave/valor).
+ * Esta modificação poderá fazer diferença para instâncias grandes.
+ * Utilizar uma estrutura que seja safe thread.
+ * 
+ ********************************************************************/
+
 package com.upmsp.structure;
 
 import java.io.BufferedReader;
@@ -15,21 +24,20 @@ public class Instance {
 	private String linha;
 	private int n_jobs;
 	private int n_maqs;
-	private int n_desconhecido;
+	//private int n_desconhecido; //Valor existente na instancia mas desconhecida sua finalidade
 	private int[][] tempo_exec;
 	private int[][] tempo_prep;
 	
 	public Instance(String file_name) throws IOException{
-		this.is = new FileInputStream("instancias/"+file_name+".txt");
-		//PARA O PROCESSO AUTOMATIZADO DESCOMENTAR LINHA ABAIXO
-		//this.is = new FileInputStream(name_file);
+		
+		this.is = new FileInputStream(file_name);
 		this.isr = new InputStreamReader(this.is);
 		this.br = new BufferedReader(this.isr);
 		this.linha = br.readLine();
 		this.tk = new StringTokenizer(linha, " ");
 		this.n_jobs = Integer.parseInt(tk.nextToken());
 		this.n_maqs = Integer.parseInt(tk.nextToken());
-		this.n_desconhecido = Integer.parseInt(tk.nextToken());
+		//this.n_desconhecido = Integer.parseInt(tk.nextToken());
 		this.tempo_exec = new int[n_maqs][n_jobs];
 		this.tempo_prep = new int[n_jobs*n_maqs][n_jobs];
 		this.ler(file_name);

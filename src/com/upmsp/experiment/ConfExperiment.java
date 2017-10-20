@@ -1,3 +1,15 @@
+/*******************************************************************
+ * 
+ * Esta classe contem as instruções de chamadas das heurísticas 
+ * implementadas. Inicialmente é apontado para o diretórios com as 
+ * intancias e são executadas em séries as heurísticas. Os resultados
+ * são armazendados em um objeto com os valores de makespan e no final
+ * são gravados em arquivo de texto.
+ * 
+ * Classe criada em: 19 de out 2017
+ * @author cesar
+ * 
+ *******************************************************************/
 package com.upmsp.experiment;
 
 import java.io.IOException;
@@ -22,16 +34,17 @@ public class ConfExperiment {
 		sol.print_solution();
 		
 		System.out.println("SOLUÇÃO VNS:\n");
-		Vns vns = new Vns(sol, 100, best_results);
+		Vns vns = new Vns(sol, 1000, best_results);
 		sol = vns.execute_vns();
 		sol.print_solution();
 		
 		System.out.println("SOLUÇÃO SA:\n");
-		SA sa = new SA(sol, 600, best_results);
+		SA sa = new SA(sol, 800, best_results);
 		sol = sa.execute_sa();
 		sol.print_solution();
 		
-		WriteResultsFile write_file = new WriteResultsFile(best_results);
+		WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
+		write_file.write();
 	}
 
 }
