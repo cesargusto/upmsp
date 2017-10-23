@@ -125,6 +125,7 @@ public class Solution implements Cloneable{
     }
 	
 	public void print_solution(){
+		System.out.println();
 		for(int x = 0;x < arquivo.getN_maqs();x++){
 			System.out.printf("Maq-%d\tTempo: %d\n",x,this.solucao.get(x).tempoMaq(arquivo, x));
 			for(int y = 0;y < this.getMaq(x).getSizeMaq();y++){

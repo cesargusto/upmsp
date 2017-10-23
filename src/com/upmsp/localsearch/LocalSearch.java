@@ -1,6 +1,5 @@
 package com.upmsp.localsearch;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import com.upmsp.structure.Solution;
@@ -142,7 +141,7 @@ public class LocalSearch {
 	}
 	
 	public Solution change_Maq(Solution solucao) throws CloneNotSupportedException{
-
+		//Troca todo o sequenciamento de máquinas
 		Solution best_sol_mov = solucao.clone();
 		
 		int sol_size = solucao.getSizeSol();

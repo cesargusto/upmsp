@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class Machine {
-	private ArrayList machine;
+	private ArrayList<Integer> machine;
 	
 	public Machine(){
 		this.machine = new ArrayList<Integer>();
@@ -28,7 +28,7 @@ public class Machine {
 		return machine.size();
 	}
 	
-	public ArrayList getMaquina() {
+	public ArrayList<Integer> getMaquina() {
 		return machine;
 	}
 
