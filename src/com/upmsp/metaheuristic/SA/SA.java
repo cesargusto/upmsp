@@ -96,7 +96,7 @@ public class SA {
 			return m_sa.Switch(s);
 		case 4:
 			if(solucao.getMaq(this.solucao.maior_menor().get(0)).getSizeMaq() > 3)
-				return m_sa.Swap(s);
+				return m_sa.two_swap(s);
 			else
 				return m_sa.task_move(s);
 		case 5:

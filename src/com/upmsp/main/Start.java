@@ -21,9 +21,9 @@ public class Start {
 		//exp.start();
 		
 		
-		Instance inst = new Instance("instancias/small/I_12_2_S_1-99_10.txt");
-		inst.imprime_tempo_exec();
-		inst.imprime_tempo_prep();
+		Instance inst = new Instance("instancias/small/I_6_5_S_1-49_9.txt");
+		//inst.imprime_tempo_exec();
+		//inst.imprime_tempo_prep();
 		Solution sol = new Solution(inst);
 		sol.ConstroiSolution();
 		sol.print_solution();
@@ -34,16 +34,16 @@ public class Start {
 		sol = mov.perturbation_hard(sol, 1);
 		sol.print_solution();*/
 		
-		/*
-		Vns vns = new Vns(sol, 600, br);
+		
+		Vns vns = new Vns(sol, 10000, br);
 		sol = vns.execute_vns();
 		sol.print_solution();
-		*/
 		
+		/*
 		System.out.println("SOLUÇÃO SA:");
-		SA sa = new SA(sol, 600, br);
+		SA sa = new SA(sol, 10, br);
 		sol = sa.execute_sa();
-		sol.print_solution();
+		sol.print_solution();*/
 		/*
 		System.out.println("SOLUÇÃO ILS:\n");
 		Ils ils = new Ils(sol, 500, br);

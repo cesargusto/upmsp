@@ -3,6 +3,7 @@ package com.upmsp.metaheuristic.vns;
 import java.util.Random;
 
 import com.upmsp.localsearch.LocalSearch;
+import com.upmsp.metaheuristic.SA.MovimentosSA;
 import com.upmsp.experiment.BestResults;
 import com.upmsp.structure.Solution;
 
@@ -12,6 +13,7 @@ public class Vns {
 	private Solution solution;
 	private BestResults best_results;
 	private LocalSearch ls;
+	private MovimentosSA m_sa;
 	private final int quant_moviments = 5;
 	private int num_it;
 	
@@ -21,6 +23,7 @@ public class Vns {
 		this.best_results = best_results;
 		this.best_solution = s.clone();
 		this.ls = new LocalSearch();
+		this.m_sa = new MovimentosSA();
 	}
 	public Solution execute_vns() throws CloneNotSupportedException{
 		int v = 1;
@@ -42,17 +45,14 @@ public class Vns {
 				else{
 					Random rnd = new Random();
 					if(rnd.nextBoolean()){
-						if(solution.getMaq(solution.maior_menor().get(2)).getSizeMaq() > 2){
-							this.solution = ls.two_realloc(solution);
-							if(solution.getMaq(solution.maior_menor().get(2)).getSizeMaq() > 2){
-								this.solution = ls.two_swap(solution);
-							}
-						}
-					}else
-						if(solution.getMaq(solution.maior_menor().get(2)).getSizeMaq() > 2){
-							this.solution = ls.two_realloc(solution);
-							}
+						this.solution = m_sa.two_realloc(solution);
+						this.solution = m_sa.two_swap(solution);
 						v = 1;
+					}else
+						{
+							this.solution = m_sa.two_realloc(solution);
+							v = 1;
+						}
 				}
 			}
 			this.best_results.setMakespan_list(best_solution.makespan());

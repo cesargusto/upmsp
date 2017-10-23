@@ -9,29 +9,32 @@
 package com.upmsp.metaheuristic.ils;
 
 import com.upmsp.localsearch.LocalSearch;
+import com.upmsp.metaheuristic.SA.MovimentosSA;
 import com.upmsp.structure.Solution;
 
 public class Pertubations {
 	
 	private LocalSearch ls;
+	private MovimentosSA m_sa;
 	private final int quant_levels = 3;
-	
-	public int getQuant_levels() {
-		return quant_levels;
-	}
 
 	public Pertubations(){
 		this.ls = new LocalSearch();
+		this.m_sa = new MovimentosSA();
 	}
 	
 	public Solution execute(Solution s, int level) throws CloneNotSupportedException{
 		
 		switch(level){
-			case 1: return ls.two_realloc(s);
-			case 2: return ls.two_swap(s);
+			case 1: return m_sa.two_realloc(s);
+			case 2: return m_sa.two_swap(s);
 			case 3: return ls.change_Maq(s);
 		}
 		return s;
+	}
+	
+	public int getQuant_levels() {
+		return quant_levels;
 	}
 
 }
