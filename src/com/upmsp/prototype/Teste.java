@@ -38,11 +38,11 @@ public class Teste {
 		Random rnd = new Random();
 		ArrayList<Integer> lista = new ArrayList<>();
 		
-		for(int i = 0;i < 15; i++){
+		for(int i = 0;i < 25; i++){
 			lista.add(rnd.nextInt(50));
 		}
 		
-		Collections.sort(lista);
+		//Collections.sort(lista);
 		System.out.println(lista);
 		Grasp grasp = new Grasp();
 		System.out.println(grasp.execute_grasp(lista, 0.6));
