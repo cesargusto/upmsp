@@ -44,7 +44,8 @@ public class Solution implements Cloneable{
 		int num_maq = arquivo.getN_maqs();
 		int num_jobs = arquivo.getN_jobs();
 		int value = Integer.MAX_VALUE;
-		int position = -1;
+		int position_maq = -1;
+		int position_job = -1;
 		int aux = Integer.MAX_VALUE;
 		
 		for(int x = 0;x < num_maq;x++){
@@ -56,10 +57,11 @@ public class Solution implements Cloneable{
 				aux = arquivo.getT_exec(j, i);
 				if(aux < value){
 					value = aux;
-					position = j;
+					position_maq = j;
+					position_job = i;
 				}
 			}
-			this.solucao.get(position).addJobToMaq(value);
+			this.solucao.get(position_maq).addJobToMaq(position_job);
 			aux = Integer.MAX_VALUE;
 			value = Integer.MAX_VALUE;
 		}
