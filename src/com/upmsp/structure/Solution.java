@@ -39,6 +39,32 @@ public class Solution implements Cloneable{
 		return solCp;
 	}
 	
+	public void construction_greedy(){
+		
+		int num_maq = arquivo.getN_maqs();
+		int num_jobs = arquivo.getN_jobs();
+		int value = Integer.MAX_VALUE;
+		int position = -1;
+		int aux = Integer.MAX_VALUE;
+		
+		for(int x = 0;x < num_maq;x++){
+			this.setMaqSolucao(new Machine());
+		}
+		
+		for(int i = 0;i < num_jobs;i++){
+			for(int j = 0;j < num_maq;j++){
+				aux = arquivo.getT_exec(j, i);
+				if(aux < value){
+					value = aux;
+					position = j;
+				}
+			}
+			this.solucao.get(position).addJobToMaq(value);
+			aux = Integer.MAX_VALUE;
+			value = Integer.MAX_VALUE;
+		}
+	}
+	
 	public void ConstroiSolution(){
 		ArrayList<Integer> candidatos = new ArrayList<>(arquivo.getN_jobs());
 		for(int i = 0;i < arquivo.getN_jobs();i++){
@@ -127,8 +153,11 @@ public class Solution implements Cloneable{
 	public void print_solution(){
 		System.out.println();
 		for(int x = 0;x < arquivo.getN_maqs();x++){
-			System.out.printf("Maq-%d\tTempo: %d\n",x,this.solucao.get(x).tempoMaq(arquivo, x));
-			for(int y = 0;y < this.getMaq(x).getSizeMaq();y++){
+			System.out.printf("Maq-%d\tTempo: %d\n",
+					x,this.solucao.get(x).tempoMaq(arquivo, x));
+			for(int y = 0;
+					y < this.getMaq(x).getSizeMaq();
+					y++){
 				System.out.printf("%d ",this.solucao.get(x).getJob(y));
 			}
 			//System.out.printf("\nTempo:\t%d \n",this.solucao.get(x).tempoMaq(arquivo, x));

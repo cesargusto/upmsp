@@ -23,9 +23,10 @@ public class Start {
 		
 		Instance inst = new Instance("instancias/small/I_6_3_S_1-9_9.txt");
 		inst.imprime_tempo_exec();
-		inst.imprime_tempo_prep();
+		//inst.imprime_tempo_prep();
 		Solution sol = new Solution(inst);
-		sol.ConstroiSolution();
+		//sol.ConstroiSolution();
+		sol.construction_greedy();
 		sol.print_solution();
 		
 		BestResults br = new BestResults();

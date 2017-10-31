@@ -13,7 +13,6 @@ public class Solucao {
         this.solucao = new ArrayList<>();
     }
 
-
     public ArrayList<Maquina> getSolucao() {
         return solucao;
     }
