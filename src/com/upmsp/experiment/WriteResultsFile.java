@@ -30,6 +30,7 @@ public class WriteResultsFile {
 	
 	public void write() {
 		String file_name_r = "r_"+file_name;
+		//File arquivo = new File("../results/"+file_name_r);
 		File arquivo = new File("results/"+file_name_r);
 		try{
 			if(!arquivo.exists()){

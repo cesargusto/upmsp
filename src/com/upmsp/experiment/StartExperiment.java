@@ -32,6 +32,7 @@ public class StartExperiment {
 		
 		long Start = System.currentTimeMillis();
 		
+		//String path = "../experiment_instances/";
 		String path = "experiment_instances/";
 		File[] name_list = ReadDirFilesNames.leDir(path);
 		
