@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import com.upmsp.structure.Solution;
+
 public class Grasp {
 	
 	public ArrayList<Integer> execute_grasp(
@@ -56,4 +58,6 @@ public class Grasp {
 		}
 		return solution;
 	}
+	
+	
 }

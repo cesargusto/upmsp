@@ -17,20 +17,20 @@ public class Start {
 
 	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
-		//StartExperiment exp = new StartExperiment(3);
-		//exp.start();
+		StartExperiment exp = new StartExperiment(30);
+		exp.start();
 		
 		
-		Instance inst = new Instance("instancias/small/I_10_2_S_1-124_6.txt");
-		inst.imprime_tempo_exec();
+		//Instance inst = new Instance("instancias/small/I_10_2_S_1-124_6.txt");
+		//inst.imprime_tempo_exec();
 		//inst.imprime_tempo_prep();
-		Solution sol = new Solution(inst);
-		sol.ConstroiSolution();
-		sol.print_solution();
+		//Solution sol = new Solution(inst);
+		//sol.ConstroiSolution();
+		//sol.print_solution();
 		//sol.construction_greedy();
 		//sol.print_solution();
 		
-		BestResults br = new BestResults();
+		//BestResults br = new BestResults();
 		
 		/*
 		Moviments mov = new Moviments();
@@ -48,13 +48,13 @@ public class Start {
 		sol = sa.execute_sa();
 		sol.print_solution();*/
 		
-		
+		/*
 		System.out.println("SOLUÇÃO ILS:\n");
 		Ils ils = new Ils(sol, 500, br);
 		sol = ils.execute_ils();
 		View.title_1("MELHOR SOLUÇÃO ILS");
 		sol.print_solution();
-		//284
+		*/
 	}
 
 }

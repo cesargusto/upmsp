@@ -21,7 +21,7 @@ public class WriteResultsFile {
 	
 	private BestResults best_results;
 	private String file_name;
-	private int factor_reduction = 5;
+	private int factor_reduction = 10;
 	
 	public WriteResultsFile(BestResults best_results, String file_name) {
 		this.best_results = best_results;

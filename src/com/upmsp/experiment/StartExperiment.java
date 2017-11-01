@@ -30,6 +30,8 @@ public class StartExperiment {
 	
 	public void start() throws IOException, CloneNotSupportedException {
 		
+		long Start = System.currentTimeMillis();
+		
 		String path = "experiment_instances/";
 		File[] name_list = ReadDirFilesNames.leDir(path);
 		
@@ -43,6 +45,10 @@ public class StartExperiment {
 		}
 		
 		View.title_1("FIM DO EXPERIMENTO");
+		long End = System.currentTimeMillis();
+		long Time = End - Start;
+		Time = Time / 60000;
+		View.title_1("Tempo decorrido: "+Time+" minutos");
 
 	}
 

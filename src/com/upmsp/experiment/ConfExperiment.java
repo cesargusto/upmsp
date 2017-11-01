@@ -15,6 +15,7 @@ package com.upmsp.experiment;
 import java.io.IOException;
 
 import com.upmsp.metaheuristic.SA.SA;
+import com.upmsp.metaheuristic.ils.Ils;
 import com.upmsp.metaheuristic.vns.Vns;
 import com.upmsp.structure.Instance;
 import com.upmsp.structure.Solution;
@@ -31,17 +32,22 @@ public class ConfExperiment {
 		System.out.println("CONSTRUÇÃO:\n");
 		Solution sol = new Solution(inst);
 		sol.ConstroiSolution();
-		sol.print_solution();
+		//sol.print_solution();
 		
 		System.out.println("SOLUÇÃO VNS:\n");
 		Vns vns = new Vns(sol, 1000, best_results);
 		sol = vns.execute_vns();
-		sol.print_solution();
+		//sol.print_solution();
+		
+		System.out.println("SOLUÇÃO ILS:\n");
+		Ils ils = new Ils(sol, 1000, best_results);
+		sol = ils.execute_ils();
+		//sol.print_solution();
 		
 		System.out.println("SOLUÇÃO SA:\n");
 		SA sa = new SA(sol, 800, best_results);
 		sol = sa.execute_sa();
-		sol.print_solution();
+		//sol.print_solution();
 		
 		WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
 		write_file.write();

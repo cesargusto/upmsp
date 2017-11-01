@@ -152,6 +152,10 @@ public class Solution implements Cloneable{
     	Collections.swap(this.solucao, i, j);
     }
 	
+	public Instance getArquivo() {
+		return arquivo;
+	}
+	
 	public void print_solution(){
 		System.out.println();
 		for(int x = 0;x < arquivo.getN_maqs();x++){
