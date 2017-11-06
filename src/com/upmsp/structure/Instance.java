@@ -93,6 +93,14 @@ public class Instance {
 		i_job_ant = i_maq * this.n_jobs + i_job_ant;
 		return this.tempo_prep[i_job_ant][i_job];
 	}
+	
+	public int[][] getMatriz_T_exec(){
+		return this.tempo_exec;
+	}
+	
+	public int[][] getMatriz_T_prep(){
+		return this.tempo_prep;
+	}
 
 	public void imprime_tempo_exec(){
 		//IMPRIME MATRIZ DE TEMPOS DE EXECUÇAO

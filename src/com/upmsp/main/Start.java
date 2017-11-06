@@ -7,6 +7,8 @@ import com.upmsp.experiment.StartExperiment;
 import com.upmsp.experiment.WriteResultsFile;
 import com.upmsp.localsearch.Moviments;
 import com.upmsp.metaheuristic.SA.SA;
+import com.upmsp.metaheuristic.grasp.Grasp;
+import com.upmsp.metaheuristic.grasp.GraspConstruction;
 import com.upmsp.metaheuristic.ils.Ils;
 import com.upmsp.metaheuristic.vns.Vns;
 import com.upmsp.structure.Instance;
@@ -17,12 +19,18 @@ public class Start {
 
 	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
-		StartExperiment exp = new StartExperiment(30);
-		exp.start();
+		//StartExperiment exp = new StartExperiment(30);
+		//exp.start();
 		
 		
-		//Instance inst = new Instance("instancias/small/I_10_2_S_1-124_6.txt");
+		Instance inst = new Instance("instancias/small/I_10_3_S_1-9_7.txt");
 		//inst.imprime_tempo_exec();
+		
+		Grasp grasp = new Grasp(inst, 0.5, 100);
+		View.title_1("MELHOR SOLUÇÃO GRASP");
+		grasp.execute_grasp().print_solution();;
+		
+		
 		//inst.imprime_tempo_prep();
 		//Solution sol = new Solution(inst);
 		//sol.ConstroiSolution();

@@ -131,7 +131,29 @@ public class Solution implements Cloneable{
 		
 		return maior_menor;
 	}
+	/**
+	 * 
+	 * Métodos: verifica_nulidade e corrige_nulidade
+	 * implementados em: 5/11/17
+	 * Objetivos: Verificar e corrigir problemas de máquinas sem alocação de tarefas.
+	 *  
+	 */
+	public void verifica_nulidade(){
+		for(int t = 0;t < arquivo.getN_maqs();t++){
+			if(this.getMaq(t).getSizeMaq() == 0){
+				this.corrige_nulidade(t);
+			}
+		}
+	}
 	
+	public void corrige_nulidade(int indice){
+		Random rnd = new Random();
+		int indice_mkspan = this.maior_menor().get(2);
+		int size_mkspan = this.getMaq(indice_mkspan).getSizeMaq();
+		int pos = rnd.nextInt(size_mkspan);
+		this.getMaq(indice).addJobToMaq(this.getMaq(indice_mkspan).getJob(pos));
+		this.getMaq(indice_mkspan).removeJobToMaq(pos);
+	}
 	
 	public ArrayList<Machine> getSolucao() {
 		return solucao;
@@ -156,6 +178,9 @@ public class Solution implements Cloneable{
 		return arquivo;
 	}
 	
+	public void setArquivo(Instance arquivo) {
+		this.arquivo = arquivo;
+	}
 	public void print_solution(){
 		System.out.println();
 		for(int x = 0;x < arquivo.getN_maqs();x++){
