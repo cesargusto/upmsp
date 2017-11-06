@@ -41,7 +41,7 @@ public class StartExperiment {
 		for(int i = 0;i < name_list.length;i++) {
 			View.title_2(name_list[i].getName());
 			for(int j = 0; j < executions_number;j++) {
-				ConfExperiment.execute_experiment(path, name_list[i].getName());
+				ConfExperiment.execute_experiment(path, name_list[i].getName(), this.executions_number);
 			}
 		}
 		
