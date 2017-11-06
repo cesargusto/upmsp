@@ -38,7 +38,7 @@ public class ConfExperiment {
 		Vns vns = new Vns(sol, 1000, best_results);
 		sol = vns.execute_vns();
 		//sol.print_solution();
-		
+		/*
 		System.out.println("SOLUÇÃO ILS:\n");
 		Ils ils = new Ils(sol, 1000, best_results);
 		sol = ils.execute_ils();
@@ -48,7 +48,7 @@ public class ConfExperiment {
 		SA sa = new SA(sol, 800, best_results);
 		sol = sa.execute_sa();
 		//sol.print_solution();
-		
+		*/
 		WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
 		write_file.write();
 	}

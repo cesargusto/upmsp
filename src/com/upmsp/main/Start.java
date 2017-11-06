@@ -19,17 +19,17 @@ public class Start {
 
 	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
-		//StartExperiment exp = new StartExperiment(30);
-		//exp.start();
+		StartExperiment exp = new StartExperiment(30);
+		exp.start();
 		
 		
-		Instance inst = new Instance("instancias/small/I_10_3_S_1-9_7.txt");
+		//Instance inst = new Instance("instancias/small/I_10_3_S_1-9_7.txt");
 		//inst.imprime_tempo_exec();
-		
+		/*
 		Grasp grasp = new Grasp(inst, 0.5, 100);
 		View.title_1("MELHOR SOLUÇÃO GRASP");
 		grasp.execute_grasp().print_solution();;
-		
+		*/
 		
 		//inst.imprime_tempo_prep();
 		//Solution sol = new Solution(inst);

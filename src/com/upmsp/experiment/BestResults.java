@@ -42,6 +42,14 @@ public class BestResults {
 		this.makespan_list.add(makespan);
 	}
 
+	public int getSize_best_list() {
+		return best_list.size();
+	}
+	
+	public Integer getElement_Best_list(int i) {
+		return best_list.get(i);
+	}
+	
 	public ArrayList<Integer> getBest_list() {
 		return best_list;
 	}
@@ -50,8 +58,8 @@ public class BestResults {
 		return best_list.get(i);
 	}
 
-	public void setBest_list(Integer best_mkspan) {
-		this.best_list.add(best_mkspan);
+	public void setBest_list(long fo_solucao_linha) {
+		this.best_list.add((int) fo_solucao_linha);
 	}
 
 	public Solution getBest_solution() {

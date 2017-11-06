@@ -73,10 +73,10 @@ public class SA {
 			
 			T = ALF * T;
 			IterT = 0;
-			this.best_results.setMakespan_list(melhor_solucao.makespan());
+			//this.best_results.setMakespan_list(melhor_solucao.makespan());
 		}
 		solucao = melhor_solucao.clone();
-		
+		this.best_results.setBest_list(solucao.makespan());
 		return solucao;
 	}
 	

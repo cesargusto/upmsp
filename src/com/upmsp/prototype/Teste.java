@@ -38,13 +38,15 @@ public class Teste {
 		Random rnd = new Random();
 		ArrayList<Integer> lista = new ArrayList<>();
 		
-		for(int i = 0;i < 25; i++){
-			lista.add(rnd.nextInt(50));
+		for(int i = 0;i < 10; i++){
+			lista.add(i+10);
 		}
 		
 		//Collections.sort(lista);
 		System.out.println(lista);
-		Grasp grasp = new Grasp();
-		System.out.println(grasp.execute_grasp(lista, 0.6));
+		lista.remove(lista.indexOf(13));
+		System.out.println(lista);
+		//Grasp grasp = new Grasp();
+		//System.out.println(grasp.execute_grasp(lista, 0.6));
     }
 }

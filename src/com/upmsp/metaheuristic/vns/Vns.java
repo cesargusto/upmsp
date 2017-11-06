@@ -55,10 +55,9 @@ public class Vns {
 						}
 				}
 			}
-			this.best_results.setMakespan_list(best_solution.makespan());
 			num_it --;
 		}
-		//this.best_solution.print_solution();
+		this.best_results.setBest_list(best_solution.makespan());
 		return best_solution;
 	}
 	

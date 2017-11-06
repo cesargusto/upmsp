@@ -6,6 +6,7 @@
 
 package com.upmsp.metaheuristic.grasp;
 
+import com.upmsp.experiment.BestResults;
 import com.upmsp.metaheuristic.ils.LocalSearchILS;
 import com.upmsp.structure.Instance;
 import com.upmsp.structure.Solution;
@@ -18,11 +19,13 @@ public class Grasp {
 	private Instance inst;
 	private GraspConstruction gc;
 	private LocalSearchILS bl_ils;
+	private BestResults best_results;
 	
 	public Grasp(Instance inst, double alfa, int grasp_max){
 		this.inst = inst;
 		this.gc = new GraspConstruction(this.inst);
 		this.bl_ils = new LocalSearchILS();
+		this.best_results = new BestResults();
 		this.alfa = alfa;
 		this.grasp_max = grasp_max;
 	}
@@ -43,7 +46,7 @@ public class Grasp {
 			}
 			this.grasp_max --;
 		}
-		
+		this.best_results.setBest_list(fo_melhor);
 		return s_star;
 	}
 }
