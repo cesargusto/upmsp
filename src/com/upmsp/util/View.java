@@ -13,5 +13,11 @@ public class View {
 		System.out.println("\t"+frase);
 		System.out.println("-----------------------------------\n");
 	}
+	
+	public static void title_3(String frase) {
+		System.out.println("-----------------------------------");
+		System.out.println("\t"+frase);
+		//System.out.println("-----------------------------------\n");
+	}
 
 }

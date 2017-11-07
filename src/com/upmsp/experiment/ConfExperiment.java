@@ -29,46 +29,47 @@ public class ConfExperiment {
 		Instance inst = new Instance(complete_path);
 		
 		//VNS
+		BestResults best_results = new BestResults();
+		Solution sol;
 		for(int i = 0;i < num_it;i++) {
-			BestResults best_results = new BestResults();
-			Solution sol = new Solution(inst);
+			sol = new Solution(inst);
 			sol.ConstroiSolution();
 			Vns vns = new Vns(sol, 1000, best_results);
 			sol = vns.execute_vns();
-			WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
-			write_file.write();
 		}
+		WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
+		write_file.write();
 		
 		//ILS
+		best_results = new BestResults();
 		for(int i = 0;i < num_it;i++) {
-			BestResults best_results = new BestResults();
-			Solution sol = new Solution(inst);
+			sol = new Solution(inst);
 			sol.ConstroiSolution();
 			Ils ils = new Ils(sol, 1000, best_results);
 			sol = ils.execute_ils();
-			WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
-			write_file.write();
 		}
+		write_file = new WriteResultsFile(best_results, file_name);
+		write_file.write();
 		
 		//SA
+		best_results = new BestResults();
 		for(int i = 0;i < num_it;i++) {
-			BestResults best_results = new BestResults();
-			Solution sol = new Solution(inst);
+			sol = new Solution(inst);
 			sol.ConstroiSolution();
 			SA sa = new SA(sol, 800, best_results);
 			sol = sa.execute_sa();
-			WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
-			write_file.write();
 		}
+		write_file = new WriteResultsFile(best_results, file_name);
+		write_file.write();
 		
 		//GRASP
+		best_results = new BestResults();
 		for(int i = 0;i < num_it;i++) {
-			BestResults best_results = new BestResults();
-			Grasp grasp = new Grasp(inst, 0.5, 100);
+			Grasp grasp = new Grasp(inst, 0.5, 100, best_results);
 			grasp.execute_grasp();
-			WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
-			write_file.write();
 		}
+		write_file = new WriteResultsFile(best_results, file_name);
+		write_file.write();
 		
 	}
 

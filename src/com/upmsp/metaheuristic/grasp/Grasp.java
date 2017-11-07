@@ -21,11 +21,11 @@ public class Grasp {
 	private LocalSearchILS bl_ils;
 	private BestResults best_results;
 	
-	public Grasp(Instance inst, double alfa, int grasp_max){
+	public Grasp(Instance inst, double alfa, int grasp_max, BestResults best_results){
 		this.inst = inst;
 		this.gc = new GraspConstruction(this.inst);
 		this.bl_ils = new LocalSearchILS();
-		this.best_results = new BestResults();
+		this.best_results = best_results;
 		this.alfa = alfa;
 		this.grasp_max = grasp_max;
 	}
@@ -42,7 +42,7 @@ public class Grasp {
 			if(fo_aux < fo_melhor){
 				s_star = s.clone();
 				fo_melhor = fo_aux;
-				System.out.println("Melhora: "+fo_melhor);
+				//System.out.println("Melhora: "+fo_melhor);
 			}
 			this.grasp_max --;
 		}

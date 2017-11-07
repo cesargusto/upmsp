@@ -55,34 +55,4 @@ public class WriteResultsFile {
 				System.out.println("Erro ao escrever no arquivo");
 			}	
 	}
-	
-	public void write_2() {
-		String file_name_r = "r_"+file_name;
-		//File arquivo = new File("../results/"+file_name_r);
-		File arquivo = new File("results/"+file_name_r);
-		try{
-			if(!arquivo.exists()){
-				arquivo.createNewFile();
-			}
-			
-			FileWriter fw = new FileWriter(arquivo, true);
-			BufferedWriter bw = new BufferedWriter(fw);
-			
-			for(int i = 0;i < this.best_results.getSize_list();i+=factor_reduction){
-				int value = this.best_results.getElement_list(i); 
-				bw.write(Integer.toString(value));
-				bw.write(" ");
-
-			}
-			
-            bw.newLine();
-			
-			bw.close();
-			fw.close();
-			
-			}catch(Exception e){
-				System.out.println("Erro ao escrever no arquivo");
-			}	
-	}
-
 }

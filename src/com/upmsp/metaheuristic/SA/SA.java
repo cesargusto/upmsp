@@ -76,7 +76,8 @@ public class SA {
 			//this.best_results.setMakespan_list(melhor_solucao.makespan());
 		}
 		solucao = melhor_solucao.clone();
-		this.best_results.setBest_list(solucao.makespan());
+		int fo_melhor = solucao.makespan();
+		this.best_results.setBest_list(fo_melhor);
 		return solucao;
 	}
 	

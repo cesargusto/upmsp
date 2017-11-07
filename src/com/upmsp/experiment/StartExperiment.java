@@ -39,17 +39,15 @@ public class StartExperiment {
 		View.title_1("INICIO DO EXPERIMENTO");
 		
 		for(int i = 0;i < name_list.length;i++) {
-			View.title_2(name_list[i].getName());
-			for(int j = 0; j < executions_number;j++) {
-				ConfExperiment.execute_experiment(path, name_list[i].getName(), this.executions_number);
-			}
+			View.title_3(name_list[i].getName());
+			ConfExperiment.execute_experiment(path, name_list[i].getName(), this.executions_number);
 		}
 		
-		View.title_1("FIM DO EXPERIMENTO");
 		long End = System.currentTimeMillis();
 		long Time = End - Start;
-		Time = Time / 60000;
-		View.title_1("Tempo decorrido: "+Time+" minutos");
+		Time = Time / 1000;
+		View.title_2("Tempo: "+Time+" segundos");
+		View.title_1("FIM DO EXPERIMENTO");
 
 	}
 

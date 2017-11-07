@@ -19,7 +19,7 @@ public class Start {
 
 	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
-		StartExperiment exp = new StartExperiment(3);
+		StartExperiment exp = new StartExperiment(20);
 		exp.start();
 		
 		
