@@ -65,6 +65,7 @@ public class Vnlsa {
 					else{
 						boolean chave = true;
 						while(chave){
+							//REDEFINIR AS ESTRATEGIAS DE PERTUBAÇÃO
 							sol_aux = this.pertubations.execute(solution, level);
 							sol_aux = this.lsi.local_search_ils(sol_aux);
 							mspan_vns = sol_aux.makespan();
