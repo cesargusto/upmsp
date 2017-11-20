@@ -56,7 +56,7 @@ public class ConfExperiment {
 		for(int i = 0;i < num_it;i++) {
 			sol = new Solution(inst);
 			sol.ConstroiSolution();
-			SA sa = new SA(sol, 800, best_results);
+			SA sa = new SA(sol, 1000, best_results);
 			sol = sa.execute_sa();
 		}
 		write_file = new WriteResultsFile(best_results, file_name);
@@ -65,7 +65,7 @@ public class ConfExperiment {
 		//GRASP
 		best_results = new BestResults();
 		for(int i = 0;i < num_it;i++) {
-			Grasp grasp = new Grasp(inst, 0.5, 100, best_results);
+			Grasp grasp = new Grasp(inst, 0.5, 1000, best_results);
 			grasp.execute_grasp();
 		}
 		write_file = new WriteResultsFile(best_results, file_name);

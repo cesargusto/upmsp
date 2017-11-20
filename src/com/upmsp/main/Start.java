@@ -1,6 +1,8 @@
 package com.upmsp.main;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 
 import com.upmsp.experiment.BestResults;
 import com.upmsp.experiment.StartExperiment;
@@ -9,6 +11,7 @@ import com.upmsp.localsearch.Moviments;
 import com.upmsp.metaheuristic.SA.SA;
 import com.upmsp.metaheuristic.grasp.Grasp;
 import com.upmsp.metaheuristic.grasp.GraspConstruction;
+import com.upmsp.metaheuristic.hibrid.Vnlsa;
 import com.upmsp.metaheuristic.ils.Ils;
 import com.upmsp.metaheuristic.vns.Vns;
 import com.upmsp.structure.Instance;
@@ -19,50 +22,55 @@ public class Start {
 
 	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
-		StartExperiment exp = new StartExperiment(20);
-		exp.start();
+		//StartExperiment exp = new StartExperiment(10);
+		//exp.start();
+		
+		//67
+		Instance inst_1 = new Instance("instancias/large/I_50_10_S_1-9_1.txt");
+		
+		int num_exec = 30;
+		int num_iter = 100;
+		ArrayList<Integer>lista_vns = new ArrayList<>(30);
+		ArrayList<Integer>lista_vnlsa = new ArrayList<>(30);
+
+		View.title_2("EXPERIMENTO ALGORITMO VNLSA");
+		
+		long Start = System.currentTimeMillis();
+		for(int i = 0;i < num_exec;i++){
+			Solution s_1 = new Solution(inst_1);
+			s_1.construction_greedy();
+			BestResults best_r_1 = new BestResults();
+			Vns vns = new Vns(s_1, num_iter, best_r_1);
+			lista_vns.add(vns.execute_vns().makespan());
+		}
+		
+		long End = System.currentTimeMillis();
+		long Time_vns = End - Start;
 		
 		
-		//Instance inst = new Instance("instancias/small/I_10_3_S_1-9_7.txt");
-		//inst.imprime_tempo_exec();
-		/*
-		Grasp grasp = new Grasp(inst, 0.5, 100);
-		View.title_1("MELHOR SOLUÇÃO GRASP");
-		grasp.execute_grasp().print_solution();;
-		*/
+		Instance inst_2 = new Instance("instancias/large/I_50_10_S_1-9_1.txt");
+
+		Start = 0;
+		End = 0;
 		
-		//inst.imprime_tempo_prep();
-		//Solution sol = new Solution(inst);
-		//sol.ConstroiSolution();
-		//sol.print_solution();
-		//sol.construction_greedy();
-		//sol.print_solution();
+		Start = System.currentTimeMillis();
+		for(int i = 0;i < num_exec;i++){
+			Solution s_2 = new Solution(inst_2);
+			s_2.construction_greedy();
+			BestResults best_r_2 = new BestResults();
+			Vnlsa vnlsa = new Vnlsa(s_2, num_iter, best_r_2);
+			lista_vnlsa.add(vnlsa.execute_vnlsa().makespan());
+		}
+		End = System.currentTimeMillis();
+		long Time_vnlsa = End - Start;
+	
 		
-		//BestResults br = new BestResults();
-		
-		/*
-		Moviments mov = new Moviments();
-		sol = mov.perturbation_hard(sol, 1);
-		sol.print_solution();*/
-		
-		
-		//Vns vns = new Vns(sol, 10000, br);
-		//sol = vns.execute_vns();
-		//sol.print_solution();
-		
-		/*
-		System.out.println("SOLUÇÃO SA:");
-		SA sa = new SA(sol, 10, br);
-		sol = sa.execute_sa();
-		sol.print_solution();*/
-		
-		/*
-		System.out.println("SOLUÇÃO ILS:\n");
-		Ils ils = new Ils(sol, 500, br);
-		sol = ils.execute_ils();
-		View.title_1("MELHOR SOLUÇÃO ILS");
-		sol.print_solution();
-		*/
+		System.out.println("\nALGORITMO\tMÉDIA\tMIN\tMAX\tTEMPO");
+		System.out.println("VNS ......: \t"+View.media(lista_vns)+"\t"
+		+Collections.min(lista_vns)+"\t"+Collections.max(lista_vns)+"\t"+Time_vns+" milis.");
+		System.out.println("VNLSA ....: \t"+View.media(lista_vnlsa)+"\t"
+		+Collections.min(lista_vnlsa)+"\t"+Collections.max(lista_vnlsa)+"\t"+Time_vnlsa+" milis.");
+
 	}
 
 }

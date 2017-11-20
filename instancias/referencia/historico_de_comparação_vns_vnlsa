@@ -1,0 +1,58 @@
+MESMO ALGORITMO:	1000 ITERAÇÕES		30 EXECUÇÕES	MESMO ALGORITMO
+
+ALGORITMO	MÉDIA	MIN	MAX	TEMPO
+
+VNS ......: 	77.0	76	78	3723 milis.
+VNLSA ....: 	77.0	76	78	3832 milis.
+
+VNS ......: 	77.0	76	78	3893 milis.
+VNLSA ....: 	77.0	76	78	3864 milis.
+
+------------------------------------------------------------
+ALGORITMO	MÉDIA	MIN	MAX	TEMPO		VNS PURO
+
+VNS ......: 	78.0	78	78	3756 milis.
+VNLSA ....: 	77.0	76	78	4001 milis.
+
+VNS ......: 	78.0	78	78	3830 milis.
+VNLSA ....: 	77.0	76	78	3931 milis.
+
+------------------------------------------------------------
+
+VNS
+public Solution execute_vnlsa() throws CloneNotSupportedException{
+		int v = 1;
+		Solution sol_aux;
+		while(num_it > 0){
+			sol_aux = vizinhanca(v, this.solution);
+			
+			int mspan_vns = sol_aux.makespan();
+			int mspan_bst = this.best_solution.makespan();
+			
+			if(mspan_vns < mspan_bst){
+				this.best_solution = sol_aux.clone();
+				this.solution = sol_aux.clone();
+				v = 1;
+			}else{
+				if(v < quant_moviments){
+					v = v + 1;
+				}	
+				else{
+					Random rnd = new Random();
+					if(rnd.nextBoolean()){
+						this.solution = m_sa.two_realloc(solution);
+						this.solution = m_sa.two_swap(solution);
+						v = 1;
+					}else
+						{
+							this.solution = m_sa.two_realloc(solution);
+							v = 1;
+						}
+				}
+			}
+			num_it --;
+		}
+		this.best_results.setBest_list(best_solution.makespan());
+		return best_solution;
+	}
+

@@ -26,7 +26,7 @@ public class SA {
 		this.solucao = solucao;
 		this.m_sa = new MovimentosSA();
 		this.best_results = best_results;
-		this.T_INICIAL = 800.0;
+		this.T_INICIAL = 400.0;
 		this.ALF = 0.9;
 		this.SAMAX = samax;
 	}

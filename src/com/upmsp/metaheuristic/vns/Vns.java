@@ -1,7 +1,5 @@
 package com.upmsp.metaheuristic.vns;
 
-import java.util.Random;
-
 import com.upmsp.localsearch.LocalSearch;
 import com.upmsp.metaheuristic.SA.MovimentosSA;
 import com.upmsp.experiment.BestResults;
@@ -13,7 +11,6 @@ public class Vns {
 	private Solution solution;
 	private BestResults best_results;
 	private LocalSearch ls;
-	private MovimentosSA m_sa;
 	private final int quant_moviments = 5;
 	private int num_it;
 	
@@ -23,7 +20,6 @@ public class Vns {
 		this.best_results = best_results;
 		this.best_solution = s.clone();
 		this.ls = new LocalSearch();
-		this.m_sa = new MovimentosSA();
 	}
 	public Solution execute_vns() throws CloneNotSupportedException{
 		int v = 1;
@@ -41,19 +37,8 @@ public class Vns {
 			}else{
 				if(v < quant_moviments){
 					v = v + 1;
-				}	
-				else{
-					Random rnd = new Random();
-					if(rnd.nextBoolean()){
-						this.solution = m_sa.two_realloc(solution);
-						this.solution = m_sa.two_swap(solution);
-						v = 1;
-					}else
-						{
-							this.solution = m_sa.two_realloc(solution);
-							v = 1;
-						}
-				}
+				}else
+					v = 1;	
 			}
 			num_it --;
 		}
@@ -76,7 +61,6 @@ public class Vns {
 			return ls.change_Maq(s);
 		default:
 			return null;
-			//System.out.println("Problema com o valor aleatório.");
 		}
 	}
 	

@@ -26,9 +26,11 @@ public class Pertubations {
 	public Solution execute(Solution s, int level) throws CloneNotSupportedException{
 		
 		switch(level){
+			//case 1: return ls.change_Maq(s);
 			case 1: return m_sa.two_realloc(s);
 			case 2: return m_sa.two_swap(s);
-			case 3: return ls.change_Maq(s);
+			case 3: return m_sa.two_realloc(m_sa.two_swap(s));
+			
 		}
 		return s;
 	}

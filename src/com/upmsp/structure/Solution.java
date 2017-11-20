@@ -198,5 +198,9 @@ public class Solution implements Cloneable{
 		System.out.println();
 	}
 	
+	public void print_makespan(){
+		System.out.println("Makespan .........: "+this.makespan());
+	}
+	
 
 }
