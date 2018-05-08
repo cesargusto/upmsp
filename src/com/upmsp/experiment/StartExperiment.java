@@ -44,6 +44,7 @@ public class StartExperiment {
 		}
 		
 		long End = System.currentTimeMillis();
+		
 		long Time = End - Start;
 		Time = Time / 1000;
 		View.title_2("Tempo: "+Time+" segundos");

@@ -28,8 +28,8 @@ public class Start {
 		//67
 		Instance inst_1 = new Instance("instancias/large/I_50_10_S_1-9_1.txt");
 		
-		int num_exec = 30;
-		int num_iter = 100;
+		int num_exec = 2;
+		int num_iter = 10;
 		ArrayList<Integer>lista_vns = new ArrayList<>(30);
 		ArrayList<Integer>lista_vnlsa = new ArrayList<>(30);
 

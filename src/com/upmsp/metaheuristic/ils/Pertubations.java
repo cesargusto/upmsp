@@ -16,7 +16,7 @@ public class Pertubations {
 	
 	private LocalSearch ls;
 	private MovimentosSA m_sa;
-	private final int quant_levels = 3;
+	private final int quant_levels = 4;
 
 	public Pertubations(){
 		this.ls = new LocalSearch();
@@ -30,6 +30,7 @@ public class Pertubations {
 			case 1: return m_sa.two_realloc(s);
 			case 2: return m_sa.two_swap(s);
 			case 3: return m_sa.two_realloc(m_sa.two_swap(s));
+			case 4: return m_sa.two_swap(m_sa.two_realloc(s));
 			
 		}
 		return s;

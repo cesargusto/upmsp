@@ -1,16 +1,15 @@
 package com.upmsp.metaheuristic.vns;
 
-import com.upmsp.localsearch.LocalSearch;
-import com.upmsp.metaheuristic.SA.MovimentosSA;
 import com.upmsp.experiment.BestResults;
 import com.upmsp.structure.Solution;
+import com.upmsp.localsearch.Moviments;
 
 public class Vns {
 	
 	private Solution best_solution;
 	private Solution solution;
 	private BestResults best_results;
-	private LocalSearch ls;
+	private Moviments mvs;
 	private final int quant_moviments = 5;
 	private int num_it;
 	
@@ -19,7 +18,7 @@ public class Vns {
 		this.solution = s;
 		this.best_results = best_results;
 		this.best_solution = s.clone();
-		this.ls = new LocalSearch();
+		this.mvs = new Moviments();
 	}
 	public Solution execute_vns() throws CloneNotSupportedException{
 		int v = 1;
@@ -50,15 +49,15 @@ public class Vns {
 
 		switch(v){
 		case 1:
-			return ls.remove_job_Maq_mspan(s);
+			return mvs.remove_job_Maq_mspan(s);
 		case 2:
-			return ls.swap_job_ExtraMaq(s);
+			return mvs.swap_job_ExtraMaq(s);
 		case 3:
-			return ls.troca_intra_Maq(s);
+			return mvs.troca_intra_Maq(s);
 		case 4:
-			return ls.insert_intra_Maq(s);
+			return mvs.insert_intra_Maq(s);
 		case 5:
-			return ls.change_Maq(s);
+			return mvs.change_Maq(s);
 		default:
 			return null;
 		}

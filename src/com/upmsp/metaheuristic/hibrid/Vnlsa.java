@@ -4,6 +4,7 @@ import java.util.Random;
 
 import com.upmsp.experiment.BestResults;
 import com.upmsp.localsearch.LocalSearch;
+import com.upmsp.localsearch.Moviments;
 import com.upmsp.metaheuristic.SA.MovimentosSA;
 import com.upmsp.metaheuristic.SA.SA;
 import com.upmsp.metaheuristic.ils.LocalSearchILS;
@@ -16,8 +17,9 @@ public class Vnlsa {
 	private Solution best_solution;
 	private Solution solution;
 	private BestResults best_results;
-	private LocalSearch ls;
+	private Moviments mvs;
 	private LocalSearchILS lsi;
+	private Moviments pertubation;
 	private Pertubations pertubations;
 	private SA sa;
 	private MovimentosSA m_sa;
@@ -28,10 +30,10 @@ public class Vnlsa {
 		this.num_it = num_it;
 		this.solution = s;
 		this.best_results = best_results;
-		this.pertubations = new Pertubations();
+		this.pertubation = new Moviments();
 		this.lsi = new LocalSearchILS();
 		this.best_solution = s.clone();
-		this.ls = new LocalSearch();
+		this.mvs = new Moviments();
 		this.m_sa = new MovimentosSA();
 	}
 	public Solution execute_vnlsa() throws CloneNotSupportedException{
@@ -43,16 +45,17 @@ public class Vnlsa {
 			
 			int mspan_vns = sol_aux.makespan();
 			int mspan_bst = this.best_solution.makespan();
-			
+			System.out.println("VNS ...."+mspan_vns);
 			if(mspan_vns < mspan_bst){
 				this.best_solution = sol_aux.clone();
 				this.solution = sol_aux.clone();
 				System.out.println("Melhora VNS ... "+mspan_vns+"\tVizinhança: "+v);
 				v = 1;
 			}else{
-				this.sa = new SA(this.solution, 300, best_results);
+				this.sa = new SA(this.solution, 600, best_results);
 				sol_aux = this.sa.execute_sa();
 				mspan_vns = sol_aux.makespan(); 
+				System.out.println("SA..."+mspan_vns);
 				if(mspan_vns < mspan_bst){
 					this.best_solution = sol_aux.clone();
 					this.solution = sol_aux.clone();
@@ -66,10 +69,12 @@ public class Vnlsa {
 						boolean chave = true;
 						while(chave){
 							//REDEFINIR AS ESTRATEGIAS DE PERTUBAÇÃO
-							sol_aux = this.pertubations.execute(solution, level);
+							sol_aux = this.pertubation.perturbation_hard(solution, level);
+							System.out.println("Makespan da pertubação: "+sol_aux.makespan());
 							sol_aux = this.lsi.local_search_ils(sol_aux);
 							mspan_vns = sol_aux.makespan();
 							mspan_bst = this.best_solution.makespan();
+							System.out.println("Pertubation hard\t"+mspan_vns+"\tLevel: "+level);
 							if(mspan_vns < mspan_bst){
 								this.best_solution = sol_aux.clone();
 								this.solution = sol_aux.clone();
@@ -77,10 +82,13 @@ public class Vnlsa {
 								level = 1;
 							}
 							else{
-								if(level < pertubations.getQuant_levels())
+								if(level < 4)
 									level = level + 1;
-								else
+								else{
+									//this.solution = sol_aux.clone();
+									level = 1;
 									chave = false;
+								}
 							}
 						}
 						v = 1;
@@ -98,15 +106,15 @@ public class Vnlsa {
 
 		switch(v){
 		case 1:
-			return ls.remove_job_Maq_mspan(s);
+			return mvs.remove_job_Maq_mspan(s);
 		case 2:
-			return ls.swap_job_ExtraMaq(s);
+			return mvs.swap_job_ExtraMaq(s);
 		case 3:
-			return ls.troca_intra_Maq(s);
+			return mvs.troca_intra_Maq(s);
 		case 4:
-			return ls.insert_intra_Maq(s);
+			return mvs.insert_intra_Maq(s);
 		case 5:
-			return ls.change_Maq(s);
+			return mvs.change_Maq(s);
 		default:
 			return null;
 		}
