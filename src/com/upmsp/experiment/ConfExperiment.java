@@ -13,6 +13,7 @@
 package com.upmsp.experiment;
 
 import java.io.IOException;
+import java.util.Properties;
 
 import com.upmsp.metaheuristic.SA.SA;
 import com.upmsp.metaheuristic.grasp.Grasp;
@@ -22,23 +23,41 @@ import com.upmsp.structure.Instance;
 import com.upmsp.structure.Solution;
 
 public class ConfExperiment {
+	//acessa os parametros no arquivo properties
+	private Properties prop;
+	private int num_iter;//iterações do algoritmo
+	private int num_exec; //iterações do experimento - 30
+	private String dir;
+	private String file_result;
 	
-	public static void execute_experiment(String dir, String file_name, int num_it) throws IOException, CloneNotSupportedException {
+	public ConfExperiment(Properties prop) {
+		//acessa os parametros no arquivo properties
+		this.prop = prop;
+		this.num_iter = Integer.parseInt(this.prop.getProperty("VNS_MAX"));//iterações do algoritmo
+		this.num_exec = Integer.parseInt(this.prop.getProperty("N_EXEC")); //iterações do experimento - 30
+		this.dir = this.prop.getProperty("VNS_PATH"); //caminho das instâncias
+		this.file_result = this.prop.getProperty("RESULT_PATH"); //caminho de gravação dos resultados
+	}
+	
+	public void execute_experiment(String file_name) throws IOException, CloneNotSupportedException {
 		
-		String complete_path = dir + file_name;
+		String complete_path = this.dir + file_name;
 		Instance inst = new Instance(complete_path);
 		
 		//VNS
 		BestResults best_results = new BestResults();
 		Solution sol;
-		for(int i = 0;i < num_it;i++) {
+		for(int i = 0;i < num_iter;i++) {
 			sol = new Solution(inst);
 			sol.ConstroiSolution();
-			Vns vns = new Vns(sol, 1000, best_results);
+			Vns vns = new Vns(sol, num_iter, best_results);
 			sol = vns.execute_vns();
 		}
-		WriteResultsFile write_file = new WriteResultsFile(best_results, file_name);
-		write_file.write();
+		WriteResultsFile write_file = new WriteResultsFile(best_results, file_name, this.prop);
+		write_file.write_gap();
+		//write_file.write();
+		
+		/*
 		
 		//ILS
 		best_results = new BestResults();
@@ -70,7 +89,8 @@ public class ConfExperiment {
 		}
 		write_file = new WriteResultsFile(best_results, file_name);
 		write_file.write();
-		
+	
+		*/
 	}
 
 }

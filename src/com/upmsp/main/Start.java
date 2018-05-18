@@ -20,12 +20,13 @@ import com.upmsp.util.View;
 
 public class Start {
 
-	public static void main(String[] args) throws IOException, CloneNotSupportedException {
+	public static void main(String[] args) throws Exception {
 
-		//StartExperiment exp = new StartExperiment(10);
-		//exp.start();
+		StartExperiment exp = new StartExperiment();
+		exp.start();
 		
 		//67
+		/*
 		Instance inst_1 = new Instance("instancias/large/I_50_10_S_1-9_1.txt");
 		
 		int num_exec = 2;
@@ -70,7 +71,7 @@ public class Start {
 		+Collections.min(lista_vns)+"\t"+Collections.max(lista_vns)+"\t"+Time_vns+" milis.");
 		System.out.println("VNLSA ....: \t"+View.media(lista_vnlsa)+"\t"
 		+Collections.min(lista_vnlsa)+"\t"+Collections.max(lista_vnlsa)+"\t"+Time_vnlsa+" milis.");
-
+	*/
 	}
 
 }

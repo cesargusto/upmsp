@@ -17,15 +17,18 @@ package com.upmsp.experiment;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
 
 import com.upmsp.util.View;
 
 public class StartExperiment {
 	
-	private int executions_number;
-
-	public StartExperiment(int n_exec){
-		this.executions_number = n_exec;
+	private Properties prop;
+	private ConfExperiment conf;
+	
+	public StartExperiment() throws Exception{
+		this.prop = new ReadFileConf().getProp();
+		this.conf = new ConfExperiment(prop);
 	}
 	
 	public void start() throws IOException, CloneNotSupportedException {
@@ -33,14 +36,14 @@ public class StartExperiment {
 		long Start = System.currentTimeMillis();
 		
 		//String path = "../experiment_instances/";
-		String path = "experiment_instances/";
-		File[] name_list = ReadDirFilesNames.leDir(path);
+		String path = this.prop.getProperty("VNS_PATH");//caminho do diretório de instancias
+		File[] name_list = ReadDirFilesNames.leDir(path);//lista de arquivos contidos no diretorio
 		
-		View.title_1("INICIO DO EXPERIMENTO");
+		//View.title_1("INICIO DO EXPERIMENTO");
 		
 		for(int i = 0;i < name_list.length;i++) {
 			View.title_3(name_list[i].getName());
-			ConfExperiment.execute_experiment(path, name_list[i].getName(), this.executions_number);
+			conf.execute_experiment(name_list[i].getName());
 		}
 		
 		long End = System.currentTimeMillis();
@@ -48,7 +51,10 @@ public class StartExperiment {
 		long Time = End - Start;
 		Time = Time / 1000;
 		View.title_2("Tempo: "+Time+" segundos");
-		View.title_1("FIM DO EXPERIMENTO");
+		
+		WriteResultsFile write = new WriteResultsFile(prop);
+		write.write_resume(Time, name_list.length);
+		//View.title_1("FIM DO EXPERIMENTO");
 
 	}
 
