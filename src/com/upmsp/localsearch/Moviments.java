@@ -11,6 +11,8 @@
  ***************************************************************************************/
 package com.upmsp.localsearch;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Random;
 
 import com.upmsp.structure.Solution;
@@ -19,12 +21,12 @@ public class Moviments {
 	
 	private final int n_vizinhanca = 5;
 	
-	public boolean avalia_solucao(Solution s, Solution s_melhor) throws CloneNotSupportedException{
+	public boolean avalia_solucao(int best_makespan, Solution s_corrente, Solution s_melhor, ArrayList<Integer> alter_maqs) throws CloneNotSupportedException{
 		
-		int fo_1 = s.makespan();
-		int fo_2 = s_melhor.makespan();
+		int fo_1  = best_makespan;
+		int fo_2 = Collections.max(s_corrente.makespan(s_corrente.Tempos(), alter_maqs));
 		
-		if(fo_1 < fo_2){
+		if(fo_2 < fo_1){
 			return true;
 		}else
 			return false;
@@ -33,6 +35,9 @@ public class Moviments {
 	public Solution troca_intra_Maq(Solution solucao) throws CloneNotSupportedException{
 
 		Solution best_sol_mov = solucao.clone();
+		int best_mspan = solucao.makespan();
+		
+		ArrayList<Integer> alter_maqs = new ArrayList<>();
 		
 		int tamanho_sol = solucao.getSizeSol();
 
@@ -46,9 +51,12 @@ public class Moviments {
 	
 						solucao.getMaq(i).setJobToMaq(j, solucao.getMaq(i).getJob(w));
 						solucao.getMaq(i).setJobToMaq(w, a);
+						
+						alter_maqs.add(i);
 	
-						if(avalia_solucao(solucao, best_sol_mov)){
+						if(avalia_solucao(best_mspan, solucao, best_sol_mov, alter_maqs)){
 							best_sol_mov = solucao.clone();
+							best_mspan = best_sol_mov.makespan();
 						}
 						//solucao.print_solution();//avaliação da solution
 	
@@ -56,6 +64,7 @@ public class Moviments {
 	
 						solucao.getMaq(i).setJobToMaq(j, solucao.getMaq(i).getJob(w));
 						solucao.getMaq(i).setJobToMaq(w, a);
+						alter_maqs.clear();
 					}
 				}
 			}
@@ -68,6 +77,9 @@ public class Moviments {
 		
 		Solution best_sol_mov = solucao.clone();
 		
+		int best_mspan = solucao.makespan();
+		ArrayList<Integer> alter_maqs = new ArrayList<>();
+		
 		int tamanho_sol = solucao.getSizeSol();
 
 		for(int i = 0;i < tamanho_sol;i++){
@@ -79,13 +91,17 @@ public class Moviments {
 					for(int w = j+1;w < tamanho_maq;w++){
 						solucao.getMaq(i).insertJobToMaq(w, a);
 	
-						if(avalia_solucao(solucao, best_sol_mov)){
+						alter_maqs.add(i);
+						
+						if(avalia_solucao(best_mspan, solucao, best_sol_mov, alter_maqs)){
 							best_sol_mov = solucao.clone();
+							best_mspan = best_sol_mov.makespan();
 						}
 						//solucao.print_solution();//avaliação da solution
 						solucao.getMaq(i).removeJobToMaq(w);
 					}
 					solucao.getMaq(i).insertJobToMaq(j, a);
+					alter_maqs.clear();
 				}
 			}
 		}
@@ -97,6 +113,9 @@ public class Moviments {
 
 		Solution best_sol_mov = solucao.clone();
 		
+		int best_mspan = solucao.makespan();
+		ArrayList<Integer> alter_maqs = new ArrayList<>();
+		
 		int sol_size = solucao.getSizeSol();
 		int maq_mspan = solucao.maior_menor().get(2);
 		int machine_mkpan_size = solucao.getMaq(maq_mspan).getSizeMaq();
@@ -105,19 +124,24 @@ public class Moviments {
 			for(int i = 0;i < machine_mkpan_size;i++){
 				int job_pivot = solucao.getMaq(maq_mspan).getJob(i);
 				solucao.getMaq(maq_mspan).removeJobToMaq(i);
+				alter_maqs.add(maq_mspan);
 				for(int j = 0;j < sol_size;j++){
 					if(j != maq_mspan){
 						solucao.getMaq(j).addJobToMaq(job_pivot);
+						alter_maqs.add(j);
 						
-						if(avalia_solucao(solucao, best_sol_mov)){
+						if(avalia_solucao(best_mspan, solucao, best_sol_mov, alter_maqs)){
 							best_sol_mov = solucao.clone();
+							best_mspan = best_sol_mov.makespan();
 						}
 						//solucao.print_solution();//avaliação da solution
 						solucao.getMaq(j).removeLastJob();
 					}
 				}
+				alter_maqs.remove(1);
 				solucao.getMaq(maq_mspan).insertJobToMaq(i, job_pivot);
 			}
+			alter_maqs.clear();
 		}
 		return best_sol_mov;
 	}
@@ -127,12 +151,16 @@ public class Moviments {
 
 		Solution best_sol_mov = solucao.clone();
 		
+		int best_mspan = solucao.makespan();
+		ArrayList<Integer> alter_maqs = new ArrayList<>();
+		
 		int sol_size = solucao.getSizeSol();
 		int maq_mspan = solucao.maior_menor().get(2);
 		int machine_mkpan_size = solucao.getMaq(maq_mspan).getSizeMaq();
 		
 		for(int i = 0;i < machine_mkpan_size;i++){
 			int job_pivot = solucao.getMaq(maq_mspan).getJob(i);
+			alter_maqs.add(maq_mspan);
 			for(int j = 0;j < sol_size;j++){
 				if(j != maq_mspan){
 					for(int w = 0;w < solucao.getMaq(j).getSizeMaq();w++){
@@ -140,15 +168,21 @@ public class Moviments {
 						solucao.getMaq(maq_mspan).setJobToMaq(i, job_pivot_2);
 						solucao.getMaq(j).setJobToMaq(w, job_pivot);
 						
-						if(avalia_solucao(solucao, best_sol_mov)){
+						alter_maqs.add(j);
+						
+						if(avalia_solucao(best_mspan, solucao, best_sol_mov, alter_maqs)){
 							best_sol_mov = solucao.clone();
+							best_mspan = best_sol_mov.makespan();
 						}
 						//solucao.print_solution();//avaliação da solution
 						solucao.getMaq(maq_mspan).setJobToMaq(i, job_pivot);
-						solucao.getMaq(j).setJobToMaq(w, job_pivot_2);						
+						solucao.getMaq(j).setJobToMaq(w, job_pivot_2);
+						
+						alter_maqs.remove(1);
 					}
 				}
 			}
+			alter_maqs.clear();
 		}
 		return best_sol_mov;
 	}
@@ -157,18 +191,25 @@ public class Moviments {
 		//Troca todo o sequenciamento de máquinas
 		Solution best_sol_mov = solucao.clone();
 		
+		int best_mspan = solucao.makespan();
+		ArrayList<Integer> alter_maqs = new ArrayList<>();
+		
 		int sol_size = solucao.getSizeSol();
 		int maq_mspan = solucao.maior_menor().get(2);
 		
 		for(int i = 0;i < sol_size;i++){
 			if(i != maq_mspan){
 				solucao.swap_Machine(maq_mspan, i);
-				if(avalia_solucao(solucao, best_sol_mov)){
+				alter_maqs.add(maq_mspan);
+				alter_maqs.add(i);
+				if(avalia_solucao(best_mspan, solucao, best_sol_mov, alter_maqs)){
 					best_sol_mov = solucao.clone();
+					best_mspan = best_sol_mov.makespan();
 				}
 				//solucao.print_solution();//avaliação da solution
 				solucao.swap_Machine(maq_mspan, i);
 			}
+			alter_maqs.clear();
 		}	
 		return best_sol_mov;
 	}

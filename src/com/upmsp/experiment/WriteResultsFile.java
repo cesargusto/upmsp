@@ -82,10 +82,10 @@ public class WriteResultsFile {
 			FileWriter fw = new FileWriter(arquivo, true);
 			BufferedWriter bw = new BufferedWriter(fw);
 			 
-			bw.write("QUANTIDADE DE ARQUIVOS PROCESSADOS ......: ");
+			bw.write(" - ARQUIVOS PROCESSADOS ..........: ");
 			bw.write(Integer.toString(quant_arqs));
 			bw.newLine();
-			bw.write("TEMPO TOTAL DE PROCESSAMENTO EM (SEC.)...: ");
+			bw.write(" - TEMPO DE PROCESSAMENTO(SEC.)...: ");
 			bw.write(Float.toString(time));
 			
             bw.newLine();
@@ -137,7 +137,7 @@ public class WriteResultsFile {
 			bw.write(Float.toString(value_lit));//escreve o valor absoluto da literatura
 			bw.write(prop.getProperty("WRITE_FILE_DELIMIT"));//delimitador
 
-			gap = (value - value_lit)/value; //calcula o gap
+			gap = (value - value_lit)/value_lit; //calcula o gap
 			
 			bw.write(Float.toString(gap)); //grava o gap
 			

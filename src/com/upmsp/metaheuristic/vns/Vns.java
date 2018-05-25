@@ -49,6 +49,7 @@ public class Vns {
 
 		switch(v){
 		case 1:
+			//return mvs.insert_intra_Maq(s);
 			return mvs.remove_job_Maq_mspan(s);
 		case 2:
 			return mvs.swap_job_ExtraMaq(s);
@@ -56,6 +57,7 @@ public class Vns {
 			return mvs.troca_intra_Maq(s);
 		case 4:
 			return mvs.insert_intra_Maq(s);
+			//return mvs.remove_job_Maq_mspan(s);
 		case 5:
 			return mvs.change_Maq(s);
 		default:

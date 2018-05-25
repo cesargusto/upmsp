@@ -97,6 +97,32 @@ public class Solution implements Cloneable{
 		return mspan;
 	}
 	
+	public ArrayList<Integer> Tempos(){
+		
+		ArrayList<Integer>tempos = new ArrayList<>(arquivo.getN_maqs());
+		for(int t = 0;t < arquivo.getN_maqs();t++){
+			tempos.add(this.getMaq(t).tempoMaq(arquivo, t));
+		}
+		
+		return tempos;
+	}
+	/*
+	 * Esta função recebe a lista de indices de maquinas alteradas pelo movimeto e a 
+	 * lista de makespan anterior, o calculo é feito apenas nas máquinas alteradas
+	 * e as duas listas são mescladas e retornadas. Com isso o makespan não é recalculado
+	 * completamente, Esta mesma ideia deverá ser aplicada de forma análoga no calculo de tempo da máquina
+	 * 
+	 */
+	public ArrayList<Integer> makespan(ArrayList<Integer>tempos, ArrayList<Integer> alter_maqs){
+		int mspan = 0;
+		ArrayList<Integer>mspans = tempos;
+		for(int t = 0;t < alter_maqs.size();t++){
+			mspans.set(alter_maqs.get(t), this.getMaq(alter_maqs.get(t)).tempoMaq(arquivo, alter_maqs.get(t)));
+		}
+		//mspan = Collections.max(mspans);
+		return mspans;
+	}
+	
 	public ArrayList<Integer> maior_menor(){
 		ArrayList<Integer> maior_menor = new ArrayList<>();
 		int indice_menor = -1;
