@@ -120,6 +120,5 @@ public class Instance {
 			}
 			System.out.println();
 		}
-	}	
-	
+	}		
 }

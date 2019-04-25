@@ -97,6 +97,15 @@ public class Solution implements Cloneable{
 		return mspan;
 	}
 	
+	public int indice_makespan(){
+		int makespan = this.makespan();
+		int index = -1;
+		if(Tempos().contains(makespan)){
+			index = Tempos().indexOf(makespan);
+		}
+		return index;
+	}
+	
 	public ArrayList<Integer> Tempos(){
 		
 		ArrayList<Integer>tempos = new ArrayList<>(arquivo.getN_maqs());
@@ -192,6 +201,7 @@ public class Solution implements Cloneable{
 	public Machine getMaq(int i) {
 		return solucao.get(i);
 	}
+	
 	public void setMaqSolucao(Machine maq) {
 		this.solucao.add(maq);
 	}
@@ -207,6 +217,14 @@ public class Solution implements Cloneable{
 	public void setArquivo(Instance arquivo) {
 		this.arquivo = arquivo;
 	}
+	
+	public int get_T_exec(int i_maq, int i_job){
+		return this.arquivo.getT_exec(i_maq, this.getMaq(i_maq).getJob(i_job));
+	}
+	public int get_T_prep(int i_maq, int i_job_ant, int i_job){
+		return this.arquivo.getT_prep(i_maq, this.getMaq(i_maq).getJob(i_job_ant), this.getMaq(i_maq).getJob(i_job));
+	}
+	
 	public void print_solution(){
 		System.out.println();
 		for(int x = 0;x < arquivo.getN_maqs();x++){
