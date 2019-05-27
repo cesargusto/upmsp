@@ -16,15 +16,16 @@ package com.upmsp.metaheuristic.grasp;
 import java.util.ArrayList;
 import java.util.Random;
 
+import com.upmsp.instances.ReadInstances;
 import com.upmsp.structure.Instance;
 import com.upmsp.structure.Machine;
 import com.upmsp.structure.Solution;
 
 public class GraspConstruction {
 	
-	private Instance instance;
+	private ReadInstances instance;
 	
-	public GraspConstruction(Instance inst){
+	public GraspConstruction(ReadInstances inst){
 		this.instance = inst;
 	}
 	

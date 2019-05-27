@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
+import com.upmsp.instances.ReadInstances;
 import com.upmsp.localsearch.LocalSearch;
 
 public class Solution implements Cloneable{
 	
-	private Instance arquivo;
+	private ReadInstances arquivo;
 	private ArrayList<Machine> solucao;
 	
-	public Solution(Instance arq){
+	public Solution(ReadInstances arq){
 		this.arquivo = arq;
 		this.solucao = new ArrayList<>();
 	}
@@ -210,11 +211,11 @@ public class Solution implements Cloneable{
     	Collections.swap(this.solucao, i, j);
     }
 	
-	public Instance getArquivo() {
+	public ReadInstances getArquivo() {
 		return arquivo;
 	}
 	
-	public void setArquivo(Instance arquivo) {
+	public void setArquivo(ReadInstances arquivo) {
 		this.arquivo = arquivo;
 	}
 	

@@ -3,6 +3,8 @@ package com.upmsp.structure;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import com.upmsp.instances.ReadInstances;
+
 public class Machine {
 	private ArrayList<Integer> machine;
 	
@@ -10,7 +12,7 @@ public class Machine {
 		this.machine = new ArrayList<Integer>();
 	}
 
-	public int tempoMaq(Instance arq, int nummaq){
+	public int tempoMaq(ReadInstances arq, int nummaq){
 		int tempo_total = 0;
 		int tempo_prep = 0;
 		int tempo_exec = 0;
@@ -24,7 +26,7 @@ public class Machine {
 		return tempo_total;
 	}
 	
-	public ArrayList<ArrayList<Integer>> tempos_Maq(Instance arq, int nummaq){
+	public ArrayList<ArrayList<Integer>> tempos_Maq(ReadInstances arq, int nummaq){
 		
 		ArrayList<ArrayList<Integer>> tempos = new ArrayList<>(2);
 		
@@ -49,7 +51,7 @@ public class Machine {
 		return tempos;
 	}
 	
-	public int tempoMaq(Instance arq, int nummaq, ArrayList<ArrayList<Integer>> tempos, ArrayList<Integer>pos_alter, int ms_atual){
+	public int tempoMaq(ReadInstances arq, int nummaq, ArrayList<ArrayList<Integer>> tempos, ArrayList<Integer>pos_alter, int ms_atual){
 		int diferenca_prep = 0;
 		int diferenca_exec = 0;
 		

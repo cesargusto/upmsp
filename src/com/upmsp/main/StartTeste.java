@@ -16,7 +16,7 @@ import com.upmsp.experiment.ReadFileConf;
 import com.upmsp.localsearch.Moviments;
 
 public class StartTeste {
-	
+	/*
 	public static String dir = "instancias/small/";
 	public static String name = "I_12_5_S_1-99_";
 	public static String path;
@@ -36,8 +36,9 @@ public class StartTeste {
 			System.out.println();
 		}
 	}
-	
+	*/
 	public static void roda_um() throws IOException, CloneNotSupportedException{
+		/*
 		Instance inst = new Instance(dir+"I_12_5_S_1-99_2.txt");
 		Solution s = new Solution(inst);
 		//inst.imprime_tempo_prep();
@@ -56,11 +57,17 @@ public class StartTeste {
 		System.out.println("Old: "+mv.troca_intra_Maq(p).makespan());
 		p.print_solution();
 		System.out.println();*/	
+		
+		
 	}
 	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 
 		//roda_todos();
+		
+		/*
 		roda_um();
+		
+		*/
 		
 		//Properties prop = new ReadFileConf().getProp();
 		//String dir = "instancias/small/";

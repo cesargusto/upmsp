@@ -24,18 +24,14 @@ import java.util.StringTokenizer;
 public class R_ruiz {
 
 	private Map<String, Integer> ruiz;
-	private Properties prop;
-	private int valor;
 	
-	public R_ruiz(Properties prop) {
+	public R_ruiz() {
 		this.ruiz = new HashMap<>();
-		this.prop = prop;
-		this.valor = 0;
 	}
 
-	public void ler() throws IOException {
+	public void ler(String path_bound, String bound_delimit) throws IOException {
 
-        InputStream is = new FileInputStream(prop.getProperty("BOUNDS_FILE_LIT"));
+        InputStream is = new FileInputStream(path_bound);
         InputStreamReader isr = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(isr);
 
@@ -47,13 +43,15 @@ public class R_ruiz {
         
         while(br.ready()) {
         	linha = br.readLine();
-        	st = new StringTokenizer(linha, prop.getProperty("BOUNDS_FILE_DELIMIT"));
+        	st = new StringTokenizer(linha, bound_delimit);
         
         	inst_name = (String)st.nextToken();
         	valor = Integer.parseInt(st.nextToken());
         	
         	ruiz.put(inst_name, valor);
 		}
+        
+        br.close();
 	}
 	
 	public int getValor(String name) {

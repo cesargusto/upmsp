@@ -14,12 +14,6 @@ public class View {
 		return media;
 	}
 	
-	public static float mediana(ArrayList<Integer> lista){
-		float mediana = 0;
-		
-		return mediana;
-	}
-	
 	public static void title_1(String frase) {
 		System.out.println("\n**********************************");
 		System.out.println("\t"+frase);

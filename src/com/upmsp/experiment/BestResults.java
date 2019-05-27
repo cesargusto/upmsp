@@ -9,8 +9,11 @@
 package com.upmsp.experiment;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Properties;
 
 import com.upmsp.structure.Solution;
+import com.upmsp.util.Calcs;
 
 public class BestResults {
 	
@@ -18,12 +21,36 @@ public class BestResults {
 	private ArrayList<Integer> best_list;	//Melhor de cada execução
 	private Solution best_solution;			//Melhor solução
 	private ArrayList<Solution> elite_set;	//conjunto de melhores soluções
+	private Calcs calc;
+	private Properties prop;
+	private int size_ts;
+	private int n_execs;
+	private ArrayList<ArrayList<Integer>> tabela_t;
+	private ArrayList<Integer> value_t;
+	private ArrayList<Double> mediaValuesT;
 	
 	public BestResults() {
 		this.makespan_list = new ArrayList<>();
 		this.best_list = new ArrayList<>();
 		this.best_solution = new Solution();
 		this.elite_set = new ArrayList<Solution>();
+		this.calc = new Calcs();
+	}
+	
+	public BestResults(Properties prop) {
+		this.makespan_list = new ArrayList<>();
+		this.best_list = new ArrayList<>();
+		this.best_solution = new Solution();
+		this.elite_set = new ArrayList<Solution>();
+		this.calc = new Calcs();
+		this.prop = prop;
+		String ts = this.prop.getProperty("VALUES_T");
+		String[] t_s = ts.split(",");
+		this.size_ts = t_s.length;
+		this.n_execs = Integer.parseInt(this.prop.getProperty("N_EXEC"));
+		this.value_t = new ArrayList<>(size_ts);
+		this.tabela_t = new ArrayList<>(n_execs);
+		this.mediaValuesT = new ArrayList<>(size_ts);
 	}
 
 	public ArrayList<Integer> getMakespan_list() {
@@ -81,6 +108,78 @@ public class BestResults {
 	public void setElite_set(Solution solution) {
 		this.elite_set.add(solution);
 	}
+	
+	public int getMelhor() {
+		return Collections.min(this.getBest_list());
+	}
+	
+	public int getPior() {
+		return Collections.max(this.getBest_list());
+	}
+	
+	public double getMedia() {
+		return this.calc.media(this.getBest_list());
+	}
+	public double getMediana() {
+		return this.calc.mediana(this.getBest_list());
+	}
+	
+	public void setValueT(int v) {
+		this.value_t.add(v);
+	}
+	
+	public ArrayList<Integer> getValueT(){
+		return this.value_t;
+	}
+	
+	public void setTabelaT(ArrayList<Integer> t) {
+		ArrayList<Integer> temp = (ArrayList<Integer>) t.clone();
+		this.tabela_t.add(temp);
+	}
+	
+	public ArrayList<ArrayList<Integer>> getTabelaT(){
+		return this.tabela_t;
+	}
+	
+	public void clean_valueT() {
+		this.value_t.clear();
+	}
+	
+	public ArrayList<Integer> soma_valuesT(){
+		ArrayList<Integer>soma = new ArrayList<>();
+		int temp = 0;
+		for (int i = 0; i < this.tabela_t.size(); i++) {
+			for (int j = 0; j < this.size_ts; j++) {
+				if(soma.size() < this.size_ts) {
+					soma.add(this.tabela_t.get(i).get(j));
+				}
+				else {
+					temp = this.tabela_t.get(i).get(j);
+					temp = temp + soma.get(j);
+					soma.set(j, temp);
+				}
+			}
+		}
+		//this.mediaValuesT.add(null);
+		return soma;
+	}
+	
+	public void calc_media_valuesT(ArrayList<Integer> values){
+		ArrayList<Double> media = new ArrayList<>(values.size());
+		for (int i = 0; i < values.size(); i++) {
+			media.add((double)values.get(i)/this.n_execs);
+		}
+		this.setMediaValuesT(media);
+	}
+	
+	public void setMediaValuesT(ArrayList<Double> media) {
+		this.mediaValuesT = media;
+	}
+	
+	public double getMediaValuesT(int index) {
+		return this.mediaValuesT.get(index);
+	}
+	
 
 	
 }

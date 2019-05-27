@@ -3,6 +3,8 @@ package com.upmsp.metaheuristic.hibrid;
 import java.io.IOException;
 
 import com.upmsp.experiment.BestResults;
+import com.upmsp.instances.ReadInstances;
+import com.upmsp.instances.readRuiz;
 import com.upmsp.localsearch.LocalSearch;
 import com.upmsp.localsearch.Moviments;
 import com.upmsp.localsearch.VND;
@@ -17,7 +19,7 @@ public class Teste_vnsa {
 
 	public static void main(String[] args) throws IOException, CloneNotSupportedException {
 		
-		Instance inst = new Instance("instancias/large/I_50_10_S_1-9_1.txt");
+		ReadInstances inst = new readRuiz("instancias/large/I_50_10_S_1-9_1.txt");
 		//Instance inst = new Instance("instancias/small/I_12_2_S_1-124_1.txt");
 
 		Solution s = new Solution(inst);
