@@ -120,7 +120,8 @@ public class Solution implements Cloneable{
 	 * Esta função recebe a lista de indices de maquinas alteradas pelo movimeto e a 
 	 * lista de makespan anterior, o calculo é feito apenas nas máquinas alteradas
 	 * e as duas listas são mescladas e retornadas. Com isso o makespan não é recalculado
-	 * completamente, Esta mesma ideia deverá ser aplicada de forma análoga no calculo de tempo da máquina
+	 * completamente, Esta mesma ideia deverá ser aplicada de forma análoga no calculo de 
+	 * tempo da máquina
 	 * 
 	 */
 	public ArrayList<Integer> makespan(ArrayList<Integer>tempos, ArrayList<Integer> alter_maqs){
@@ -224,6 +225,14 @@ public class Solution implements Cloneable{
 	}
 	public int get_T_prep(int i_maq, int i_job_ant, int i_job){
 		return this.arquivo.getT_prep(i_maq, this.getMaq(i_maq).getJob(i_job_ant), this.getMaq(i_maq).getJob(i_job));
+	}
+	
+	public int get_T_prep(int i_maq, int i_job_ant, int i_maq2,int i_job){
+		return this.arquivo.getT_prep(i_maq, this.getMaq(i_maq).getJob(i_job_ant), this.getMaq(i_maq2).getJob(i_job));
+	}
+	
+	public int get_T_prep(int i_maq1, int i_job_ant, int i_maq2, int i_job, int maq_calc){
+		return this.arquivo.getT_prep(maq_calc, this.getMaq(i_maq1).getJob(i_job_ant), this.getMaq(i_maq2).getJob(i_job));
 	}
 	
 	public void print_solution(){

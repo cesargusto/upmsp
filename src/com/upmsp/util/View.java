@@ -3,7 +3,7 @@ package com.upmsp.util;
 import java.util.ArrayList;
 
 public class View {
-	
+	/*
 	public static float media(ArrayList<Integer> lista){
 		float media = 0;
 		int somador = 0;
@@ -12,7 +12,7 @@ public class View {
 		}
 		media = somador / lista.size();
 		return media;
-	}
+	}*/
 	
 	public static void title_1(String frase) {
 		System.out.println("\n**********************************");
